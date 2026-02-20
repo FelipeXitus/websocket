@@ -5,8 +5,8 @@ const form = document.getElementById('form-cadastro');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const user = form["input-usuario"].value;
-  const password = form["input-senha"].value;
+  const nome = form["input-usuario"].value;
+  const senha = form["input-senha"].value;
 
-  issueUserCreation({user, password});
+  issueUserCreation({nome, senha});
 });

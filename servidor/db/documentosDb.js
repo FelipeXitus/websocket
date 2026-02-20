@@ -1,4 +1,6 @@
-import { documentosColecao } from "./dbConnect.js";
+import {getConnectDb} from "./dbConnect.js";
+
+const documentosColecao = await getConnectDb("documentos");
 
 function obterDocumentos() {
   const documentos = documentosColecao.find().toArray();
