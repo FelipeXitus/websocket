@@ -8,7 +8,7 @@ function saltHashData(data) {
 
 function verifyHash(data, salt, hash) {
     const hashedData = crypto.scryptSync(data, salt, 64).toString('hex');
-    return hashedData === hash;
+    return crypto.timingSafeEqual(Buffer.from(hashedData, 'hex'), Buffer.from(hash, 'hex'));
 }
 
 export { saltHashData, verifyHash };
