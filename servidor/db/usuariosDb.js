@@ -1,10 +1,14 @@
-import {getConnectDb} from "./dbConnect.js";
-import { saltHashData } from "../utils/saltHash.js";
+import { getConnectDb } from "./dbConnect.js";
+import { saltHashData, verifyHash } from "../utils/saltHash.js";
 
 const usuariosColecao = await getConnectDb("usuarios");
 
 function encontrarUsuario(nome) {
   return usuariosColecao.findOne({ nome });
+}
+
+function validarSenha(senha, salt, hash) {
+  return verifyHash(senha, salt, hash);
 }
 
 function adicionarUsuario({ nome, senha }) {
@@ -13,4 +17,4 @@ function adicionarUsuario({ nome, senha }) {
   return usuariosColecao.insertOne({ nome, senha: { hash, salt } });
 }
 
-export { adicionarUsuario, encontrarUsuario };
+export { adicionarUsuario, encontrarUsuario, validarSenha };

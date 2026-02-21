@@ -6,4 +6,9 @@ function saltHashData(data) {
     return `${salt}:${hash}`;
 }
 
-export { saltHashData };
+function verifyHash(data, salt, hash) {
+    const hashedData = crypto.scryptSync(data, salt, 64).toString('hex');
+    return hashedData === hash;
+}
+
+export { saltHashData, verifyHash };
