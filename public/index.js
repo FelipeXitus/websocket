@@ -1,8 +1,22 @@
 import { emitirAdicionarDocumento } from "./socket-front-index.js";
+import { obterCookie, removerCookie } from "../utils/cookies.js";
+
+const session = obterCookie("session");
+if (!session) {
+  alert("Sessão não encontrada. Por favor, faça login.");
+  window.location.href = '/login/index.html';
+}
 
 const listaDocumentos = document.getElementById("lista-documentos");
 const form = document.getElementById("form-adiciona-documento");
 const inputDocumento = document.getElementById("input-documento");
+const buttonLogout = document.getElementById("botao-logout");
+
+buttonLogout.addEventListener("click", () => {
+  removerCookie("session");
+  alert("Sessão encerrada. Por favor, faça login novamente.");
+  window.location.href = '/login/index.html';
+});
 
 form.addEventListener("submit", (evento) => {
   evento.preventDefault();

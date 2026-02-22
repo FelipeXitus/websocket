@@ -16,9 +16,9 @@ function registrarEventosLogin(socket, io) {
             return;
         }
 
-        socket.emit('autentication-user-success', { message: 'Login bem-sucedido!' });
         const session = await generateSession(usuario.nome, usuario.senha.hash);
-        console.log('Session gerada:', session);
+        socket.emit('session-user-success', session);
+        socket.emit('autentication-user-success', { message: 'Login bem-sucedido!' });
     });
 }
 
