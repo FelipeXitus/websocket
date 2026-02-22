@@ -4,7 +4,7 @@ async function generateSession(usuario, senhaHash) {
 
     const secretKey = process.env.SECRET_KEY_SESSION;
     const sessionToken = await generateJwt({
-        "nome": usuario.nome,
+        "nome": usuario,
         "senha": senhaHash,
         "iat": Math.floor(Date.now() / 1000)
     }, secretKey);

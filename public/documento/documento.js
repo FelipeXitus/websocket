@@ -6,14 +6,23 @@ import {
 
 const parametros = new URLSearchParams(window.location.search);
 const nomeDocumento = parametros.get("nome");
-
 const textoEditor = document.getElementById("editor-texto");
 const tituloDocumento = document.getElementById("titulo-documento");
 const botaoExcluir = document.getElementById("excluir-documento");
+const usersList = document.getElementById("usuarios-conectados");
 
 tituloDocumento.textContent = nomeDocumento || "Documento sem título";
 
-selecionarDocumento(nomeDocumento);
+function onAuthorizationSuccess(payloadToken) {
+  selecionarDocumento({ nomeDocumento, nomeUsuario: payloadToken.nome, });
+}
+
+function updateUsersInterface(userInDocument) {
+  usersList.innerHTML = "";
+  userInDocument.forEach((user) => {
+    usersList.innerHTML += `<li class="list-group-item">${user}</li>`;
+  });
+}
 
 textoEditor.addEventListener("keyup", () => {
   emitirTextoEditor({
@@ -37,4 +46,4 @@ function alertarERedirecionar(nome) {
   }
 }
 
-export { atualizaTextoEditor, alertarERedirecionar };
+export { atualizaTextoEditor, alertarERedirecionar, onAuthorizationSuccess, updateUsersInterface };
