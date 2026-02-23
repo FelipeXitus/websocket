@@ -22,6 +22,11 @@ function selecionarDocumento(entryData) {
 
 socket.on("usuarios_documento", updateUsersInterface);
 
+socket.on("user_already_connected", (message) => {
+  alert(message);
+  window.location.href = '/';
+});
+
 function emitirTextoEditor(dados) {
   socket.emit("texto_editor", dados);
 }

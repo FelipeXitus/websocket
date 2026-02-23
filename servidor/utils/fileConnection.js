@@ -1,13 +1,11 @@
 const fileConnection = []
 
-function addConnection(connection) {
-    fileConnection.push(connection);
+function findConnection(connection) {
+    return fileConnection.find((conn) => conn.nomeDocumento === connection.nomeDocumento && conn.nomeUsuario === connection.nomeUsuario);
 }
 
-function getUserDocument(documentName) {
-    return fileConnection
-        .filter((connection) => connection.nomeDocumento === documentName)
-        .map((connection) => connection.nomeUsuario);
+function addConnection(connection) {
+    fileConnection.push(connection);
 }
 
 function removeConnection(connection) {
@@ -17,4 +15,11 @@ function removeConnection(connection) {
     }
 }
 
-export { addConnection, getUserDocument, removeConnection };
+function getUserDocument(documentName) {
+    return fileConnection
+        .filter((connection) => connection.nomeDocumento === documentName)
+        .map((connection) => connection.nomeUsuario);
+}
+
+
+export { addConnection, getUserDocument, removeConnection, findConnection };
